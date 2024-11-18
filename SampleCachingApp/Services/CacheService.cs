@@ -37,7 +37,8 @@ namespace SampleCachingApp.Services
             //Fetching previous Hashed key and compare it with current one (removal if both arent same)
             if (!string.IsNullOrEmpty(currentCacheKeyForParameters) && currentCacheKeyForParameters != CacheVersion)
             {
-                await _cache.RemoveAsync(currentCacheKeyForParameters);
+                await _cache.RemoveAsync(key);
+                await _cache.RemoveAsync(comparisonVersionedKey);
             }
 
             string versionedKey = $"{CacheVersion}:{key}";
